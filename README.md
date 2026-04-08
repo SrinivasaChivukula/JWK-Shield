@@ -1,45 +1,19 @@
-# JWK-Shield: Stateless Auth. Scalable Security. 🛡️
+# JWK-Shield 🛡️
 
-Hey! Welcome to **JWK-Shield**. This is a high-speed simulation of a modern Authentication and Key Management service. It’s built to mimic how giants like Okta or Auth0 handle **JSON Web Key Sets (JWKS)** and **Token Issuance** at scale.
+**JWK-Shield** is a high-speed simulation of a modern OIDC identity provider. I built this to master how the big players (like Okta or Auth0) handle **JWKS (JSON Web Key Sets)** and token discovery at scale.
 
-### 🧐 Why "Stateless?"
-In the world of microservices, you don't want a bottleneck. **JWK-Shield** acts as a lightweight identity provider that generates signed **JWTs (JSON Web Tokens)** and exposes public keys so other services can verify them without hitting a database every five seconds. It's fast, it's lean, and it follows the **OIDC** discovery pattern perfectly.
+### 🛡️ Why it matters
+In a huge microservice architecture, you need a way to verify tokens without querying a central database every time. **JWK-Shield** exposes public keys at the `/.well-known/jwks.json` endpoint, allowing other services to verify JWTs instantly and locally.
 
----
-
-### 🛠 The Engineering
-- **Flask Engine:** Clean, RESTful routing for the `/auth` and `/jwks` endpoints.
-- **RS256 Signing:** Hard-hitting asymmetric encryption using the `PyJWT` library.
-- **RSA-2048 Security:** Cryptographic integrity that keeps forged tokens out of the system.
-- **Dockerized:** Packaged for deployment. One command and it’s running in any cloud.
-- **Zero-State Latency:** Designed for high-concurrency environments where every millisecond counts.
-
----
+### 🛠 The Stack
+- **Flask:** Lean RESTful API handling auth flows and key discovery.
+- **RS256:** Asymmetric signing using private/public key pairs.
+- **Statelessness:** Designed to be fast and horizontally scalable. No database bottleneck here.
+- **Docker Ready:** Fully containerized for one-command deployment.
 
 ### 🚀 Launch it
-#### With Docker
-```bash
-docker build -t jwk-shield .
-docker run -p 8080:8080 jwk-shield
-```
-
-#### With Python
-1. **Gear up:** `pip install -r project1/requirements.txt`
-2. **Blast off:** `python project1/src/main.py`
+- **Local:** `python project1/src/main.py`
+- **Docker:** `docker build -t jwk-shield . && docker run -p 8080:8080 jwk-shield`
 
 ---
-
-### 📂 The Breakdown
-- `src/main.py`: The control center for all auth flows.
-- `src/jwks.py`: Utilities for managing the JSON Web Key Set.
-- `src/jwtutil.py`: The low-level logic that encodes and decodes the magic tokens.
-- `Dockerfile`: Your ticket to production.
-
----
-
-### 🧠 Strategic Takeaways
-- **Asymmetric Trust:** Deeply understood why signing with a private key and verifying with a public one is the literal backbone of modern security.
-- **Graceful Key Rotation:** Built-in logic to handle expired keys, mimicking real-world key rotation scenarios.
-
----
-"Speed and security are not mutually exclusive." 🚀
+"Speed meets security at the identity layer." 🛡️
